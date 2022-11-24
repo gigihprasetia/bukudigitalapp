@@ -1,5 +1,6 @@
 import {View, Text, Image, StyleSheet} from 'react-native';
 import React from 'react';
+import {green} from '../assets/utils';
 
 const CardBook = ({imageProp}) => {
   return (

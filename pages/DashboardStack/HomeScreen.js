@@ -1,16 +1,41 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {green} from '../../assets/utils';
 import Swiper from '../../components/Swiper';
 import MaterialComunity from 'react-native-vector-icons/MaterialCommunityIcons';
 import CardBook from '../../components/CardBook';
 import SearchBar from '../../components/SearchBar';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   return (
     <ScrollView>
+      <View
+        style={{
+          width: '100%',
+          height: 60,
+          borderBottomColor: green,
+
+          borderBottomWidth: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'white',
+        }}>
+        <Image
+          style={{width: 60, height: 50}}
+          source={require('../../assets/images/buku.png')}
+        />
+      </View>
       <SafeAreaView
-        style={{display: 'flex', alignItems: 'center', paddingVertical: 20}}>
+        style={{display: 'flex', alignItems: 'center', paddingVertical: 10}}>
         <SearchBar />
         <Swiper />
         <View style={Style.bestSeller}>
@@ -24,9 +49,13 @@ const HomeScreen = () => {
         {/* CardBestSeller */}
         <View style={Style.Layout}>
           {[1, 2].map(book => (
-            <View key={book}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('DetailBookScreen', {key: book})
+              }
+              key={book}>
               <CardBook imageProp={require('../../assets/images/001.jpg')} />
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
         {/* BUKU-BUKU BARU DI RAK */}
@@ -41,11 +70,11 @@ const HomeScreen = () => {
         {/* CardBuku2 di rak */}
         <View style={Style.Layout}>
           {[1, 2, 3, 4, 5, 6, 7].map(book => (
-            <View key={book}>
+            <TouchableOpacity key={book}>
               <CardBook
                 imageProp={require('../../assets/images/coverbook1.jpg')}
               />
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
       </SafeAreaView>
