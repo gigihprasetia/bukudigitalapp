@@ -1581,6 +1581,15 @@
     "react-is" "^16.13.0"
     "use-latest-callback" "^0.1.5"
 
+"@react-navigation/drawer@^6.5.1":
+  "integrity" "sha512-gBXDhAPZ0e+gRhdeZg35sNorm9B0QVtzNx0wiTUNVPa7F/Ij/EUx7J5xb7hcm2h6Wr79yxtv//GwxlTfzeXOJw=="
+  "resolved" "https://registry.npmjs.org/@react-navigation/drawer/-/drawer-6.5.1.tgz"
+  "version" "6.5.1"
+  dependencies:
+    "@react-navigation/elements" "^1.3.7"
+    "color" "^4.2.3"
+    "warn-once" "^0.1.0"
+
 "@react-navigation/elements@^1.3.7":
   "integrity" "sha512-OZg2N/dd2tl6qkfrWvmUjFsYsbEyHEv4NbZSBuT+CR+d1pzmexN2IeVmi4cEMoR7U7GwhFcHRevF36yBsjU/dw=="
   "resolved" "https://registry.npmjs.org/@react-navigation/elements/-/elements-1.3.7.tgz"
@@ -5942,7 +5951,7 @@
     "jscodeshift" "^0.13.1"
     "nullthrows" "^1.1.1"
 
-"react-native-gesture-handler@*", "react-native-gesture-handler@^2.8.0":
+"react-native-gesture-handler@*", "react-native-gesture-handler@^2.8.0", "react-native-gesture-handler@>= 1.0.0":
   "integrity" "sha512-poOSfz/w0IyD6Qwq7aaIRRfEaVTl1ecQFoyiIbpOpfNTjm2B1niY2FLrdVQIOtIOe+K9nH55Qal04nr4jGkHdQ=="
   "resolved" "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.8.0.tgz"
   "version" "2.8.0"
@@ -5963,7 +5972,7 @@
   "resolved" "https://registry.npmjs.org/react-native-reanimated-carousel/-/react-native-reanimated-carousel-3.1.5.tgz"
   "version" "3.1.5"
 
-"react-native-reanimated@>=2.7.0":
+"react-native-reanimated@^2.13.0", "react-native-reanimated@>= 1.0.0", "react-native-reanimated@>=2.7.0":
   "integrity" "sha512-yUHyYVIegWWIza4+nVyS3CSmI/Mc8kLFVHw2c6gnSHaYhYA4LeEjH/jBkoMzHk9Xd0Ra3cwtjYKAMG8OTp6JVg=="
   "resolved" "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-2.13.0.tgz"
   "version" "2.13.0"

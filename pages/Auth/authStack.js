@@ -4,8 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
 import {green} from '../../assets/utils';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Text, TouchableOpacity, View, Pressable} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

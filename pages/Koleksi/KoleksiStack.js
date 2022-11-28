@@ -1,12 +1,12 @@
+import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from './HomeScreen';
-import {Text, TouchableOpacity, View} from 'react-native';
-import KategoriScreen from './KategoriScreen';
 import {green} from '../../assets/utils';
-const Tab = createBottomTabNavigator();
+import KoleksiSayaScreen from './KoleksiSayaScreen';
+import TransaksiScreen from './TransaksiScreen';
 
-const DashboardStack = () => {
+const Tab = createBottomTabNavigator();
+const KoleksiStack = () => {
   return (
     <Tab.Navigator
       tabBar={props => (
@@ -15,14 +15,13 @@ const DashboardStack = () => {
             width: '100%',
             justifyContent: 'center',
             display: 'flex',
+
             alignItems: 'center',
             backgroundColor: 'white',
-            paddingHorizontal: 20,
           }}>
           <View
             style={{
-              marginBottom: 5,
-              width: '100%',
+              width: '90%',
               height: 60,
               padding: 4,
               backgroundColor: 'white',
@@ -35,7 +34,6 @@ const DashboardStack = () => {
               borderColor: green,
             }}>
             {props.state.routes.map((route, index) => {
-              // console.log();
               const isFocus = props.state.index === index;
               return (
                 <TouchableOpacity
@@ -47,7 +45,6 @@ const DashboardStack = () => {
                     if (!isFocus) {
                       props.navigation.navigate(route.name);
                     }
-                    // alert(route.key)
                   }}
                   key={route.key}
                   style={{
@@ -67,26 +64,23 @@ const DashboardStack = () => {
             })}
           </View>
         </View>
-      )}
-      initialRouteName="Home">
+      )}>
       <Tab.Screen
         options={{
           headerShown: false,
         }}
-        name="Home"
-        component={HomeScreen}
+        name="Koleksi Buku"
+        component={KoleksiSayaScreen}
       />
       <Tab.Screen
         options={{
-          headerTitle: () => (
-            <Text style={{fontSize: 20, color: green}}>Kategori</Text>
-          ),
+          headerShown: false,
         }}
-        name="Kategori"
-        component={KategoriScreen}
+        name="Transaksi"
+        component={TransaksiScreen}
       />
     </Tab.Navigator>
   );
 };
 
-export default DashboardStack;
+export default KoleksiStack;

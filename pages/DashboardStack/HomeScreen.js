@@ -17,20 +17,6 @@ import SearchBar from '../../components/SearchBar';
 const HomeScreen = ({navigation}) => {
   return (
     <ScrollView style={{backgroundColor: 'white'}}>
-      <View
-        style={{
-          width: '100%',
-          height: 60,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'white',
-        }}>
-        <Image
-          style={{width: 60, height: 50}}
-          source={require('../../assets/images/buku.png')}
-        />
-      </View>
       <SafeAreaView
         style={{display: 'flex', alignItems: 'center', paddingVertical: 10}}>
         <SearchBar />

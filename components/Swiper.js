@@ -1,16 +1,5 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  AppRegistry,
-  Dimensions,
-  SafeAreaView,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
-import {green} from '../assets/utils';
+import {View, SafeAreaView, Image, TouchableOpacity} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const Swipercompo = () => {

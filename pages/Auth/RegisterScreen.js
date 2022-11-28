@@ -5,20 +5,13 @@ import {
   SafeAreaView,
   StyleSheet,
   TextInput,
-  Button,
   TouchableOpacity,
-  ScrollView,
 } from 'react-native';
 import {green} from '../../assets/utils';
-const RegisterScreen = () => {
+const RegisterScreen = ({navigation}) => {
   return (
     <SafeAreaView>
       <View style={Style.view}>
-        {/* <View style={{width: '90%'}}>
-          <Text style={{fontSize: 20, color: green, fontWeight: '500'}}>
-            Sign In Ke Buku Digital-Ku
-          </Text>
-        </View> */}
         <View style={Style.containInput}>
           <Text style={Style.label}>Name</Text>
           <TextInput style={Style.input} placeholder="yourname" />
@@ -44,7 +37,9 @@ const RegisterScreen = () => {
           />
         </View>
 
-        <TouchableOpacity style={{marginTop: 25, width: '90%'}}>
+        <TouchableOpacity
+          style={{marginTop: 25, width: '90%'}}
+          onPress={() => console.log(navigation.navigate('Login'))}>
           <View style={Style.btn}>
             <Text style={{color: 'white'}}>Register Account</Text>
           </View>

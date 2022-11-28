@@ -5,13 +5,11 @@ import {
   SafeAreaView,
   StyleSheet,
   TextInput,
-  Button,
   TouchableOpacity,
-  ScrollView,
 } from 'react-native';
 import {green} from '../../assets/utils';
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   return (
     <SafeAreaView>
       <View style={Style.view}>
@@ -28,7 +26,9 @@ const LoginScreen = () => {
           />
         </View>
 
-        <TouchableOpacity style={{marginTop: 25, width: '90%'}}>
+        <TouchableOpacity
+          style={{marginTop: 25, width: '90%'}}
+          onPress={() => console.log(navigation.navigate('Home'))}>
           <View style={Style.btn}>
             <Text style={{color: 'white'}}>Login</Text>
           </View>

@@ -1,14 +1,13 @@
 import React from 'react';
-import {Text, View, TextInput} from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
 import Routing from './Routing/Routing';
+import 'react-native-gesture-handler';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 const App = () => {
   return (
-    // <GestureHandlerRootView>
-    <Routing />
-    // </GestureHandlerRootView>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <Routing />
+    </GestureHandlerRootView>
   );
 };
 
