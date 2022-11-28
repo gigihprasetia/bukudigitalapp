@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -8,15 +8,26 @@ import {
   View,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useFocusEffect, useIsFocused} from '@react-navigation/native';
 
 const KategoriScreen = () => {
+  const [pre, setpre] = useState(false);
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    console.log('hahah');
+  }, [isFocused]);
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor: 'white', height: '100%'}}>
       <ScrollView>
         <View style={Style.container}>
           {['Umum', 'Novel', 'Fiksi', 'SD', 'SMP', 'SMA / SMK'].map(
             category => (
-              <TouchableOpacity key={category} style={Style.cardCate}>
+              <TouchableOpacity
+                onPress={() => setpre(!pre)}
+                key={category}
+                style={Style.cardCate}>
                 <Text>{category}</Text>
                 <Ionicons name="md-arrow-redo-outline" size={20} />
               </TouchableOpacity>

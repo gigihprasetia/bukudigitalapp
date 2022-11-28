@@ -7,6 +7,7 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {green} from '../../assets/utils';
 
@@ -32,7 +33,20 @@ const LoginScreen = () => {
             <Text style={{color: 'white'}}>Login</Text>
           </View>
         </TouchableOpacity>
-        <Text style={{marginTop: 10}}>sudah punya akun? Daftar</Text>
+        <TouchableOpacity
+          style={{
+            marginTop: 25,
+            width: '90%',
+            display: 'flex',
+            alignItems: 'center',
+            borderWidth: 1,
+            height: 40,
+            justifyContent: 'center',
+            borderRadius: 20,
+            borderColor: green,
+          }}>
+          <Text style={{color: green}}>Login With Google</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -44,6 +58,8 @@ const Style = StyleSheet.create({
     height: '100%',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
   },
   view2: {
     width: 300,
@@ -75,4 +91,5 @@ const Style = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
 export default LoginScreen;

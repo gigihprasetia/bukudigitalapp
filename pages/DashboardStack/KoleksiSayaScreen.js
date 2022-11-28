@@ -1,8 +1,16 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {SafeAreaView, ScrollView, Text, View} from 'react-native';
 
 const KoleksiSayaScreen = () => {
-  return <Text>KoleksiSayaScreen</Text>;
+  return (
+    <SafeAreaView>
+      <ScrollView>
+        <View>
+          <Text>KoleksiSayaScreen</Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
 
 export default KoleksiSayaScreen;

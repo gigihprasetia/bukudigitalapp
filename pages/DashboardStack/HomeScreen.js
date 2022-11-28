@@ -16,14 +16,11 @@ import SearchBar from '../../components/SearchBar';
 
 const HomeScreen = ({navigation}) => {
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor: 'white'}}>
       <View
         style={{
           width: '100%',
           height: 60,
-          borderBottomColor: green,
-
-          borderBottomWidth: 1,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',

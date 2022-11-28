@@ -8,6 +8,7 @@ import DashboardStack from '../pages/DashboardStack/DashboardStack';
 import {useEffect} from 'react';
 import {StackActions} from '@react-navigation/native';
 import DetailBooksScreen from '../pages/DetailPage/DetailBooksScreen';
+import LoginScreen from '../pages/Auth/LoginScreen';
 const Stack = createNativeStackNavigator();
 
 const SplashScreen = ({navigation}) => {
@@ -60,6 +61,13 @@ const Routing = () => {
           }}
           name="DetailBookScreen"
           component={DetailBooksScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="AuthStack"
+          component={AuthStack}
         />
       </Stack.Navigator>
     </NavigationContainer>

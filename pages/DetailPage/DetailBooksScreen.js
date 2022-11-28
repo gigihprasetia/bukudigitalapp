@@ -121,10 +121,10 @@ const DetailBooksScreen = ({route, navigation}) => {
         <View style={{marginTop: 25}}>
           <Text
             style={{
-              color: green,
+              color: 'gray',
               fontSize: 20,
               borderBottomWidth: 2,
-              borderBottomColor: green,
+              borderBottomColor: 'gray',
             }}>
             Buku Dari James Cahyadi
           </Text>
