@@ -9,7 +9,7 @@ import {
 import Material from 'react-native-vector-icons/MaterialCommunityIcons';
 import {green} from '../../assets/utils';
 
-const KoleksiSayaScreen = () => {
+const KoleksiSayaScreen = ({navigation}) => {
   return (
     <SafeAreaView>
       <ScrollView
@@ -22,8 +22,8 @@ const KoleksiSayaScreen = () => {
             alignItems: 'center',
             display: 'flex',
             marginTop: 20,
-            borderWidth: 1,
-            borderColor: green,
+            // borderWidth: 1,
+            // borderColor: green,
           }}>
           <View
             style={{
@@ -46,7 +46,8 @@ const KoleksiSayaScreen = () => {
               justifyContent: 'center',
               height: 30,
               borderRadius: 20,
-            }}>
+            }}
+            onPress={() => navigation.navigate('Dashboard')}>
             <Text style={{color: 'white'}}>Cari Buku</Text>
           </TouchableOpacity>
         </View>
