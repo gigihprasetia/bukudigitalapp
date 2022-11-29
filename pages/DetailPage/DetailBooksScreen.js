@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,14 +8,21 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
 import {green, orange} from '../../assets/utils';
 import CardBook from '../../components/CardBook';
+import ModalTransaksi from '../../components/Modal/ModalTransaksi';
 
 const DetailBooksScreen = ({route, navigation}) => {
-  //   console.log(route.params);
+  const [isBuyModal, setIsBuyModal] = useState(false);
+  console.log(navigation);
   return (
     <SafeAreaView style={{padding: 10}}>
+      {isBuyModal && (
+        <ModalTransaksi
+          isPayment={() => navigation.navigate('Payment Manual')}
+          isCencel={() => setIsBuyModal(false)}
+        />
+      )}
       <ScrollView>
         <View>
           <Image
@@ -69,8 +77,9 @@ const DetailBooksScreen = ({route, navigation}) => {
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: green,
-            }}>
-            <Text style={{color: 'white'}}>Rp 86.000</Text>
+            }}
+            onPress={() => setIsBuyModal(true)}>
+            <Text style={{color: 'white'}}>Beli Rp 86.000</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{

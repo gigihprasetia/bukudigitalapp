@@ -12,6 +12,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {green} from '../assets/utils';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import KoleksiStack from '../pages/Koleksi/KoleksiStack';
+import PaymentManualScreen from '../pages/Payment/PaymentManualScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -182,6 +183,16 @@ const Routing = () => {
           }}
           name="AuthStack"
           component={AuthStack}
+        />
+        <Stack.Screen
+          options={{
+            headerTitle: () => (
+              <Text style={{color: green, fontSize: 15}}>Payment Manual</Text>
+            ),
+            headerTintColor: green,
+          }}
+          name="Payment Manual"
+          component={PaymentManualScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
