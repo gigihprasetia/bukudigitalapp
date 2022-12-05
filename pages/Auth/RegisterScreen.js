@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {green} from '../../assets/utils';
+
 const RegisterScreen = ({navigation}) => {
   return (
     <SafeAreaView>
