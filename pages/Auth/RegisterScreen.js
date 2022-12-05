@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {green} from '../../assets/utils';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const RegisterScreen = ({navigation}) => {
   return (
     <SafeAreaView>

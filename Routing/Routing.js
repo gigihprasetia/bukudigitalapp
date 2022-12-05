@@ -52,7 +52,6 @@ function MyDrawer() {
         headerTintColor: green,
       }}
       drawerContent={props => {
-        console.log(props.state.index);
         return (
           <View>
             <View
