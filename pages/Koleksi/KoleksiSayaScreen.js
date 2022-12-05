@@ -22,8 +22,6 @@ const KoleksiSayaScreen = ({navigation}) => {
             alignItems: 'center',
             display: 'flex',
             marginTop: 20,
-            // borderWidth: 1,
-            // borderColor: green,
           }}>
           <View
             style={{
