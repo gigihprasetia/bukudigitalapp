@@ -13,6 +13,7 @@ import {green} from '../assets/utils';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import KoleksiStack from '../pages/Koleksi/KoleksiStack';
 import PaymentManualScreen from '../pages/Payment/PaymentManualScreen';
+import DetailKategori from '../pages/DetailPage/DetailKategori';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -176,6 +177,13 @@ const Routing = () => {
           }}
           name="DetailBookScreen"
           component={DetailBooksScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Detail Kategori"
+          component={DetailKategori}
         />
         <Stack.Screen
           options={{
