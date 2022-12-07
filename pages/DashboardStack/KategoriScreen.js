@@ -10,8 +10,8 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useIsFocused} from '@react-navigation/native';
 
-const KategoriScreen = () => {
-  const [pre, setpre] = useState(false);
+const KategoriScreen = ({navigation}) => {
+  // const [pre, setpre] = useState(false);
   const isFocused = useIsFocused();
 
   useEffect(() => {
@@ -25,7 +25,9 @@ const KategoriScreen = () => {
           {['Umum', 'Novel', 'Fiksi', 'SD', 'SMP', 'SMA / SMK'].map(
             category => (
               <TouchableOpacity
-                onPress={() => setpre(!pre)}
+                onPress={() =>
+                  navigation.push('Detail Kategori', {category: category})
+                }
                 key={category}
                 style={Style.cardCate}>
                 <Text>{category}</Text>
