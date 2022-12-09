@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   SafeAreaView,
@@ -13,8 +13,16 @@ import Swiper from '../../components/Swiper';
 import MaterialComunity from 'react-native-vector-icons/MaterialCommunityIcons';
 import CardBook from '../../components/CardBook';
 import SearchBar from '../../components/SearchBar';
-
+import {getBook} from '../../Function/getFunction';
+import {useIsFocused} from '@react-navigation/native';
 const HomeScreen = ({navigation}) => {
+  const [dataBook, setDataBook] = useState([]);
+  const isFocused = useIsFocused();
+  useEffect(() => {
+    getBook(res => setDataBook(res));
+    // console.log('asu');
+  }, [isFocused]);
+  console.log(dataBook);
   return (
     <ScrollView style={{backgroundColor: 'white'}}>
       <SafeAreaView
@@ -31,7 +39,7 @@ const HomeScreen = ({navigation}) => {
         </View>
         {/* CardBestSeller */}
         <View style={Style.Layout}>
-          {[1, 2].map(book => (
+          {/* {[1, 2].map(book => (
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate('DetailBookScreen', {key: book})
@@ -39,7 +47,7 @@ const HomeScreen = ({navigation}) => {
               key={book}>
               <CardBook imageProp={require('../../assets/images/001.jpg')} />
             </TouchableOpacity>
-          ))}
+          ))} */}
         </View>
         {/* BUKU-BUKU BARU DI RAK */}
         <View style={Style.bestSeller}>
@@ -52,10 +60,14 @@ const HomeScreen = ({navigation}) => {
         </View>
         {/* CardBuku2 di rak */}
         <View style={Style.Layout}>
-          {[1, 2, 3, 4, 5, 6, 7].map(book => (
-            <TouchableOpacity key={book}>
+          {dataBook.map(book => (
+            <TouchableOpacity key={book.id}>
               <CardBook
-                imageProp={require('../../assets/images/coverbook1.jpg')}
+                // imageProp={
+                //   'https://global.jagoanstorage.com/s3-storage.bukudigitalku.com/public/book/1ecb83f4-1fdd-4d4f-8060-c2689e3c7e5d/6361ddaddda1b.webp'
+                // }
+                title={book.title}
+                author={book.author}
               />
             </TouchableOpacity>
           ))}

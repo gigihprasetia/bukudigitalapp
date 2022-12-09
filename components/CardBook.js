@@ -1,19 +1,27 @@
 import {View, Text, Image, StyleSheet} from 'react-native';
 import React from 'react';
 import {green} from '../assets/utils';
+import {getStringLimit} from '../Function/Function';
 
-const CardBook = ({imageProp}) => {
+const CardBook = ({
+  imageProp,
+  title = 'Your Book Cover By James ',
+  author = 'exampleAuthor',
+}) => {
   return (
     <View style={Style.ViewCard}>
-      <Image style={Style.Img} source={imageProp} />
+      <Image
+        style={Style.Img}
+        source={{
+          uri: 'https://www.gstatic.com/webp/gallery/1.webp',
+        }}
+      />
       <View style={Style.content}>
         <Text style={{...Style.txtContent, fontWeight: '600', fontSize: 15}}>
-          {'Your Book Cover By James '.length >= 30
-            ? 'Your Book Cover By James '.slice(0, 30) + '...'
-            : 'Your Book Cover By James '}
+          {getStringLimit(title, 35)}
         </Text>
         <Text style={{...Style.txtContent, fontSize: 12, marginTop: 10}}>
-          CardBook
+          {getStringLimit(author, 100)}
         </Text>
         <Text style={{...Style.txtContent, fontSize: 14, marginTop: 5}}>
           Rp 86.000
@@ -25,6 +33,7 @@ const CardBook = ({imageProp}) => {
 const Style = StyleSheet.create({
   ViewCard: {
     width: 150,
+    height: 300,
     borderWidth: 1,
     display: 'flex',
     alignItems: 'center',
@@ -37,6 +46,7 @@ const Style = StyleSheet.create({
     width: 140,
     height: 200,
     borderRadius: 10,
+    resizeMode: 'cover',
   },
   content: {
     display: 'flex',

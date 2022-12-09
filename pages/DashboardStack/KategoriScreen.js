@@ -12,11 +12,11 @@ import {useIsFocused} from '@react-navigation/native';
 
 const KategoriScreen = ({navigation}) => {
   // const [pre, setpre] = useState(false);
-  const isFocused = useIsFocused();
+  // const isFocused = useIsFocused();
 
-  useEffect(() => {
-    console.log('hahah');
-  }, [isFocused]);
+  // useEffect(() => {
+
+  // }, [isFocused]);
 
   return (
     <SafeAreaView style={{backgroundColor: 'white', height: '100%'}}>
