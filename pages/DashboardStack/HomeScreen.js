@@ -7,27 +7,72 @@ import {
   Text,
   TouchableOpacity,
   View,
+  RefreshControl,
 } from 'react-native';
 import {green} from '../../assets/utils';
 import Swiper from '../../components/Swiper';
 import MaterialComunity from 'react-native-vector-icons/MaterialCommunityIcons';
 import CardBook from '../../components/CardBook';
 import SearchBar from '../../components/SearchBar';
-import {getBook} from '../../Function/getFunction';
+import {getBestSeller, getBook} from '../../Function/getFunction';
 import {useIsFocused} from '@react-navigation/native';
+
 const HomeScreen = ({navigation}) => {
   const [dataBook, setDataBook] = useState([]);
+  const [dataBestSeller, setDataBestSeller] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+  const [querySearch, setQuerySearch] = useState('');
   const isFocused = useIsFocused();
   useEffect(() => {
-    getBook(res => setDataBook(res));
-    // console.log('asu');
-  }, [isFocused]);
-  console.log(dataBook);
+    getBook((res, isLoading) => {
+      setDataBook(res);
+      setRefresh(isLoading);
+    });
+
+    getBestSeller(res => {
+      setDataBestSeller(res.data.data);
+      console.log('');
+    });
+  }, []);
+
+  console.log(querySearch);
   return (
-    <ScrollView style={{backgroundColor: 'white'}}>
+    <ScrollView
+      // refreshControl={e => console.log(e)}
+      style={{backgroundColor: 'white'}}
+      refreshControl={
+        <RefreshControl
+          colors={[`${green}`]}
+          refreshing={refresh}
+          onRefresh={() => {
+            getBook((res, isLoading) => {
+              setDataBook(res);
+              setRefresh(isLoading);
+            });
+            getBestSeller(res => {
+              setDataBestSeller(res.data.data);
+            });
+          }}
+        />
+      }>
       <SafeAreaView
         style={{display: 'flex', alignItems: 'center', paddingVertical: 10}}>
-        <SearchBar />
+        <SearchBar
+          valueText={querySearch}
+          onChangeSearch={e => setQuerySearch(e)}
+          clickSearch={require => {
+            if (querySearch.length === 0) {
+              require(true);
+            } else {
+              navigation.navigate('Detail Kategori', {
+                category: querySearch,
+                type: 'keyword',
+              });
+              require(false);
+              setQuerySearch('');
+            }
+          }}
+        />
         <Swiper />
         <View style={Style.bestSeller}>
           <MaterialComunity
@@ -39,15 +84,19 @@ const HomeScreen = ({navigation}) => {
         </View>
         {/* CardBestSeller */}
         <View style={Style.Layout}>
-          {/* {[1, 2].map(book => (
+          {dataBestSeller.map(best => (
             <TouchableOpacity
+              key={best.book_id}
               onPress={() =>
-                navigation.navigate('DetailBookScreen', {key: book})
-              }
-              key={book}>
-              <CardBook imageProp={require('../../assets/images/001.jpg')} />
+                navigation.push('DetailBookScreen', {idBook: best.book_id})
+              }>
+              <CardBook
+                title={best.book_title}
+                author={best.book_author}
+                price={best.book_price}
+              />
             </TouchableOpacity>
-          ))} */}
+          ))}
         </View>
         {/* BUKU-BUKU BARU DI RAK */}
         <View style={Style.bestSeller}>
@@ -61,13 +110,15 @@ const HomeScreen = ({navigation}) => {
         {/* CardBuku2 di rak */}
         <View style={Style.Layout}>
           {dataBook.map(book => (
-            <TouchableOpacity key={book.id}>
+            <TouchableOpacity
+              key={book.id}
+              onPress={() =>
+                navigation.push('DetailBookScreen', {idBook: book.id})
+              }>
               <CardBook
-                // imageProp={
-                //   'https://global.jagoanstorage.com/s3-storage.bukudigitalku.com/public/book/1ecb83f4-1fdd-4d4f-8060-c2689e3c7e5d/6361ddaddda1b.webp'
-                // }
                 title={book.title}
                 author={book.author}
+                price={book.price}
               />
             </TouchableOpacity>
           ))}

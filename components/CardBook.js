@@ -7,6 +7,7 @@ const CardBook = ({
   imageProp,
   title = 'Your Book Cover By James ',
   author = 'exampleAuthor',
+  price = '1000',
 }) => {
   return (
     <View style={Style.ViewCard}>
@@ -24,7 +25,7 @@ const CardBook = ({
           {getStringLimit(author, 100)}
         </Text>
         <Text style={{...Style.txtContent, fontSize: 14, marginTop: 5}}>
-          Rp 86.000
+          {price}
         </Text>
       </View>
     </View>

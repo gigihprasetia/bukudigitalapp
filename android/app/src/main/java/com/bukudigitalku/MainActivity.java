@@ -3,8 +3,17 @@ package com.bukudigitalku;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
+import android.os.Bundle;
+import android.view.WindowManager;
 
 public class MainActivity extends ReactActivity {
+
+
+  @Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+}
 
   /**
    * Returns the name of the main component registered from JavaScript. This is used to schedule

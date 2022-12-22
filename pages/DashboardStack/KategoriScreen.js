@@ -26,7 +26,10 @@ const KategoriScreen = ({navigation}) => {
             category => (
               <TouchableOpacity
                 onPress={() =>
-                  navigation.push('Detail Kategori', {category: category})
+                  navigation.push('Detail Kategori', {
+                    category: category,
+                    type: 'Kategori',
+                  })
                 }
                 key={category}
                 style={Style.cardCate}>
