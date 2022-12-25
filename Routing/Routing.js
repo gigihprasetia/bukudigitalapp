@@ -48,7 +48,7 @@ function MyDrawer() {
     <Drawer.Navigator
       initialRouteName="Dashboard"
       screenOptions={{
-        drawerType: 'slide',
+        drawerType: 'back',
         drawerActiveTintColor: green,
         headerTintColor: green,
       }}

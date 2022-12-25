@@ -1,24 +1,39 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
 import {green} from '../../assets/utils';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Keyboard, Text, TouchableOpacity, View} from 'react-native';
+import {set} from 'react-native-reanimated';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const AuthStack = () => {
+  const [isTyping, setIsTyping] = useState(false);
+
+  useEffect(() => {
+    const open = Keyboard.addListener('keyboardDidShow', () =>
+      setIsTyping(true),
+    );
+    const close = Keyboard.addListener('keyboardDidHide', () =>
+      setIsTyping(false),
+    );
+    return () => {
+      open.remove();
+      close.remove();
+    };
+  }, []);
+
   return (
     <Tab.Navigator
-      tabBar={
-        props => (
+      tabBar={props => {
+        return isTyping ? null : (
           <View
             style={{
               width: '100%',
               justifyContent: 'center',
               display: 'flex',
-
               alignItems: 'center',
               backgroundColor: 'white',
             }}>
@@ -39,6 +54,8 @@ const AuthStack = () => {
               {props.state.routes.map((route, index) => {
                 // console.log();
                 const isFocus = props.state.index === index;
+                console.log(isTyping);
+
                 return (
                   <TouchableOpacity
                     onPress={() => {
@@ -69,28 +86,8 @@ const AuthStack = () => {
               })}
             </View>
           </View>
-        )
-        // console.log(props.descriptors.options);
-      }
-      // screenOptions={({route}) => ({
-      //   tabBarStyle: {
-      //     borderRadius: 20,
-      //     backgroundColor: 'white',
-      //     position: 'absolute',
-      //   },
-      //   tabBarIcon: ({focused, color, size}) => {
-      //     let iconName;
-      //     if (route.name === 'Login') {
-      //       iconName = 'login';
-      //     } else if (route.name === 'Register') {
-      //       iconName = 'account-plus';
-      //     }
-
-      //     return <Icon name={iconName} size={size} color={color} />;
-      //   },
-      //   tabBarActiveTintColor: green,
-      //   tabBarInactiveTintColor: 'gray',
-      // })}
+        );
+      }}
       initialRouteName="Login">
       <Tab.Screen
         options={{

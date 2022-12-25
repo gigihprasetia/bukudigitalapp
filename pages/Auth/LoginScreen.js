@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
@@ -7,9 +7,11 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+
 import {green} from '../../assets/utils';
 
 const LoginScreen = ({navigation}) => {
+  const [visible, setVisible] = useState(false);
   return (
     <SafeAreaView>
       <View style={Style.view}>
@@ -17,6 +19,7 @@ const LoginScreen = ({navigation}) => {
           <Text style={Style.label}>Email</Text>
           <TextInput style={Style.input} placeholder="yourname@gmail.com" />
         </View>
+
         <View style={Style.containInput}>
           <Text style={Style.label}>Password</Text>
           <TextInput

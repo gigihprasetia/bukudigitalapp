@@ -28,14 +28,12 @@ const HomeScreen = ({navigation}) => {
       setDataBook(res);
       setRefresh(isLoading);
     });
-
     getBestSeller(res => {
       setDataBestSeller(res.data.data);
-      console.log('');
     });
   }, []);
+  // console.log('ahai');
 
-  console.log(querySearch);
   return (
     <ScrollView
       // refreshControl={e => console.log(e)}

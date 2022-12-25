@@ -24,9 +24,10 @@ const DetailBooksScreen = ({route, navigation}) => {
     getDetailBook(idBook, res => {
       setDetailBook(res);
     });
+    // console.log('i');
   }, []);
 
-  console.log(detailBook, 'ahai');
+  // console.log(detailBook, 'ahai');
   return (
     <SafeAreaView style={{padding: 10}}>
       {isBuyModal && (
