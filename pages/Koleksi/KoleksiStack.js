@@ -69,6 +69,7 @@ const KoleksiStack = () => {
         options={{
           headerShown: false,
         }}
+        initialParams={{message: 'coolection'}}
         name="Koleksi Buku"
         component={KoleksiSayaScreen}
       />

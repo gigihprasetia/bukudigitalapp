@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -8,8 +8,24 @@ import {
 } from 'react-native';
 import Material from 'react-native-vector-icons/MaterialCommunityIcons';
 import {green} from '../../assets/utils';
+import {useIsFocused} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const KoleksiSayaScreen = props => {
+  const {navigation} = props;
+  const isFocus = useIsFocused();
+  useEffect(() => {
+    const storeData = async value => {
+      try {
+        const result = await AsyncStorage.getItem('Auth');
 
-const KoleksiSayaScreen = ({navigation}) => {
+        console.log(result);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    storeData();
+  }, [isFocus]);
+
   return (
     <SafeAreaView>
       <ScrollView

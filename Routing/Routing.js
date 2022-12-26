@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {useIsFocused} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {View, Image, Text, TouchableOpacity} from 'react-native';
@@ -14,6 +16,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import KoleksiStack from '../pages/Koleksi/KoleksiStack';
 import PaymentManualScreen from '../pages/Payment/PaymentManualScreen';
 import DetailKategori from '../pages/DetailPage/DetailKategori';
+import HomeScreen from '../pages/DashboardStack/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -44,6 +47,8 @@ const SplashScreen = ({navigation}) => {
 };
 
 function MyDrawer() {
+  const [isLogin, setIsLogin] = useState(false);
+
   return (
     <Drawer.Navigator
       initialRouteName="Dashboard"
@@ -67,7 +72,20 @@ function MyDrawer() {
               return (
                 <TouchableOpacity
                   key={val.key}
-                  onPress={() => props.navigation.navigate(val.name)}
+                  onPress={async () => {
+                    if (val.name === 'Logout') {
+                      try {
+                        const result = await AsyncStorage.removeItem('Auth');
+
+                        setIsLogin(false);
+                      } catch (e) {
+                        console.log(e);
+                        // setIsLogin(false);
+                      }
+                    } else {
+                      props.navigation.navigate(val.name);
+                    }
+                  }}
                   style={{
                     height: 50,
                     justifyContent: 'flex-start',
@@ -83,7 +101,9 @@ function MyDrawer() {
                         ? 'view-dashboard'
                         : val.name === 'Koleksi Saya'
                         ? 'book-outline'
-                        : 'account'
+                        : val.name === 'Account'
+                        ? 'account'
+                        : 'logout'
                     }
                     size={20}
                     color={props.state.index === index ? 'white' : green}
@@ -114,6 +134,7 @@ function MyDrawer() {
         name="Dashboard"
         component={DashboardStack}
       />
+
       <Drawer.Screen
         options={{
           headerTitle: () => undefined,
@@ -127,6 +148,7 @@ function MyDrawer() {
         name="Koleksi Saya"
         component={KoleksiStack}
       />
+
       <Drawer.Screen
         options={{
           headerTitle: () => undefined,
@@ -137,7 +159,7 @@ function MyDrawer() {
             />
           ),
         }}
-        name="Account"
+        name={isLogin ? 'Logout' : 'Account'}
         component={AuthStack}
       />
     </Drawer.Navigator>
@@ -162,6 +184,13 @@ const Routing = () => {
           }}
           name="DashboardStack"
           component={DashboardStack}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="HomeScreen"
+          component={HomeScreen}
         />
         <Stack.Screen
           options={{

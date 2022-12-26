@@ -54,7 +54,7 @@ const AuthStack = () => {
               {props.state.routes.map((route, index) => {
                 // console.log();
                 const isFocus = props.state.index === index;
-                console.log(isTyping);
+                // console.log(isTyping);
 
                 return (
                   <TouchableOpacity

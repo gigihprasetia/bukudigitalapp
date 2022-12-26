@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   View,
@@ -7,49 +7,130 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {green} from '../../assets/utils';
+import {Formik} from 'formik';
+import {ValidationLogin} from '../../components/Validation/ValidationRules';
+import ModalRegister from '../../components/Modal/ModalRegister';
+import {loginFunction} from '../../Function/authFunction';
+import {StackActions} from '@react-navigation/native';
 
 const LoginScreen = ({navigation}) => {
+  const [message, setMessage] = useState(null);
+  // useEffect(() => {
+  //   DeviceInfo.getAndroidId().then(androidId => {
+  //     console.log(androidId);
+  //   });
+  // }, []);
+
   const [visible, setVisible] = useState(false);
   return (
     <SafeAreaView>
       <View style={Style.view}>
-        <View style={Style.containInput}>
-          <Text style={Style.label}>Email</Text>
-          <TextInput style={Style.input} placeholder="yourname@gmail.com" />
-        </View>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+          }}
+          validationSchema={ValidationLogin}
+          onSubmit={values =>
+            loginFunction(values, async res => {
+              try {
+                await AsyncStorage.setItem('Auth', res.data.data);
+                setMessage(null);
+                // console.log('succes');
+                navigation.navigate('Drawer', {screen: 'Koleksi Saya'});
+              } catch (e) {
+                console.log(e);
+                setMessage(res.response.data.message);
+              }
+            })
+          }>
+          {({handleChange, handleBlur, handleSubmit, values, errors}) => {
+            return (
+              <>
+                <View style={Style.containInput}>
+                  <View
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'baseline',
+                    }}>
+                    <Text name={'email'} style={Style.label}>
+                      Email
+                    </Text>
+                    {errors.email && (
+                      <Text
+                        style={{marginLeft: 10, fontSize: 10, color: 'red'}}>
+                        *{errors.email}
+                      </Text>
+                    )}
+                  </View>
+                  <TextInput
+                    name={'password'}
+                    style={Style.input}
+                    onChangeText={handleChange('email')}
+                    placeholder="yourname@gmail.com"
+                  />
+                </View>
 
-        <View style={Style.containInput}>
-          <Text style={Style.label}>Password</Text>
-          <TextInput
-            style={Style.input}
-            placeholder="password"
-            secureTextEntry={true}
-          />
-        </View>
+                <View style={Style.containInput}>
+                  <View
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'baseline',
+                    }}>
+                    <Text style={Style.label}>Password</Text>
+                    {errors.password && (
+                      <Text
+                        style={{marginLeft: 10, fontSize: 10, color: 'red'}}>
+                        *{errors.password}
+                      </Text>
+                    )}
+                  </View>
+                  <TextInput
+                    name={'password'}
+                    style={Style.input}
+                    onChangeText={handleChange('password')}
+                    placeholder="*******"
+                    secureTextEntry={true}
+                  />
+                </View>
+                {message != null && (
+                  <Text style={{marginTop: 10, color: 'red'}}>*{message}</Text>
+                )}
+                <TouchableOpacity
+                  style={{marginTop: 15, width: '90%'}}
+                  onPress={
+                    // console.log(navigation.navigate('Home'))
+                    handleSubmit
+                  }>
+                  <View style={Style.btn}>
+                    <Text style={{color: 'white'}}>Login</Text>
+                  </View>
+                </TouchableOpacity>
 
-        <TouchableOpacity
-          style={{marginTop: 25, width: '90%'}}
-          onPress={() => console.log(navigation.navigate('Home'))}>
-          <View style={Style.btn}>
-            <Text style={{color: 'white'}}>Login</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            marginTop: 25,
-            width: '90%',
-            display: 'flex',
-            alignItems: 'center',
-            borderWidth: 1,
-            height: 40,
-            justifyContent: 'center',
-            borderRadius: 20,
-            borderColor: green,
-          }}>
-          <Text style={{color: green}}>Login With Google</Text>
-        </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    marginTop: 25,
+                    width: '90%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    borderWidth: 1,
+                    height: 40,
+                    justifyContent: 'center',
+                    borderRadius: 20,
+                    borderColor: green,
+                  }}>
+                  <Text style={{color: green}}>Login With Google</Text>
+                </TouchableOpacity>
+              </>
+            );
+          }}
+        </Formik>
       </View>
     </SafeAreaView>
   );
