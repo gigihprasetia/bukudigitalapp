@@ -10,9 +10,13 @@ import Material from 'react-native-vector-icons/MaterialCommunityIcons';
 import {green} from '../../assets/utils';
 import {useIsFocused} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Button} from '@react-native-material/core';
+import {useDispatch} from 'react-redux';
+
 const KoleksiSayaScreen = props => {
   const {navigation} = props;
   const isFocus = useIsFocused();
+  const dispatch = useDispatch();
   useEffect(() => {
     const storeData = async value => {
       try {

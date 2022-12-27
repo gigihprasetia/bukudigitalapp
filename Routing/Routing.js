@@ -17,6 +17,7 @@ import KoleksiStack from '../pages/Koleksi/KoleksiStack';
 import PaymentManualScreen from '../pages/Payment/PaymentManualScreen';
 import DetailKategori from '../pages/DetailPage/DetailKategori';
 import HomeScreen from '../pages/DashboardStack/HomeScreen';
+import {useSelector, useDispatch} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -47,7 +48,8 @@ const SplashScreen = ({navigation}) => {
 };
 
 function MyDrawer() {
-  const [isLogin, setIsLogin] = useState(false);
+  const isLogin = useSelector(state => state.authRedux.isLogin);
+  const dispatch = useDispatch();
 
   return (
     <Drawer.Navigator
@@ -74,17 +76,17 @@ function MyDrawer() {
                   key={val.key}
                   onPress={async () => {
                     if (val.name === 'Logout') {
-                      try {
-                        const result = await AsyncStorage.removeItem('Auth');
-
-                        setIsLogin(false);
-                      } catch (e) {
-                        console.log(e);
-                        // setIsLogin(false);
-                      }
+                      dispatch({
+                        type: 'auth',
+                        data: {
+                          status: false,
+                          token: '',
+                        },
+                      });
                     } else {
                       props.navigation.navigate(val.name);
                     }
+                    // console.log(val.name);
                   }}
                   style={{
                     height: 50,
@@ -159,7 +161,7 @@ function MyDrawer() {
             />
           ),
         }}
-        name={isLogin ? 'Logout' : 'Account'}
+        name={isLogin.status ? 'Logout' : 'Account'}
         component={AuthStack}
       />
     </Drawer.Navigator>

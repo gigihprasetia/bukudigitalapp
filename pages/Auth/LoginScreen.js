@@ -11,19 +11,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {green} from '../../assets/utils';
 import {Formik} from 'formik';
 import {ValidationLogin} from '../../components/Validation/ValidationRules';
-import ModalRegister from '../../components/Modal/ModalRegister';
 import {loginFunction} from '../../Function/authFunction';
-import {StackActions} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
 
 const LoginScreen = ({navigation}) => {
+  const dispatch = useDispatch();
   const [message, setMessage] = useState(null);
-  // useEffect(() => {
-  //   DeviceInfo.getAndroidId().then(androidId => {
-  //     console.log(androidId);
-  //   });
-  // }, []);
-
   const [visible, setVisible] = useState(false);
+
   return (
     <SafeAreaView>
       <View style={Style.view}>
@@ -38,7 +33,13 @@ const LoginScreen = ({navigation}) => {
               try {
                 await AsyncStorage.setItem('Auth', res.data.data);
                 setMessage(null);
-                // console.log('succes');
+                dispatch({
+                  type: 'auth',
+                  data: {
+                    status: true,
+                    token: res.data.data,
+                  },
+                });
                 navigation.navigate('Drawer', {screen: 'Koleksi Saya'});
               } catch (e) {
                 console.log(e);

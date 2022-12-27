@@ -2,18 +2,17 @@ import React from 'react';
 import Routing from './Routing/Routing';
 import 'react-native-gesture-handler';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {Provider as Material} from '@react-native-material/core';
-import {Provider} from 'react-redux';
-import Store from './Redux/Store';
+import {Provider} from '@react-native-material/core';
+import {Provider as StoreProvider} from 'react-redux';
+import Stores from './redux/storeRedux';
 const App = () => {
-  console.log(Provider);
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <Provider store={Store}>
-        <Material>
+      <StoreProvider store={Stores}>
+        <Provider>
           <Routing />
-        </Material>
-      </Provider>
+        </Provider>
+      </StoreProvider>
     </GestureHandlerRootView>
   );
 };
