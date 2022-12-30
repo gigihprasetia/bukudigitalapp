@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+
 import {
   Text,
   View,
@@ -8,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {green} from '../../assets/utils';
+import {green, textColor} from '../../assets/utils';
 import {Formik} from 'formik';
 import {ValidationLogin} from '../../components/Validation/ValidationRules';
 import {loginFunction} from '../../Function/authFunction';
@@ -156,6 +157,7 @@ const Style = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     borderColor: 'gray',
+    color: textColor,
   },
 
   label: {

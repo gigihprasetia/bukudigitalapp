@@ -26,6 +26,7 @@ export const loginFunction = async (form, callback) => {
     });
 
     // const data = {device_id, ...form};
+    console.log(result, 'res');
     callback(result);
     // console.log(result);
   } catch (error) {

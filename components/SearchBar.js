@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
-import {green} from '../assets/utils';
+import {green, textColor} from '../assets/utils';
 
 const SearchBar = ({valueText, onChangeSearch, clickSearch}) => {
   const [require, setRequire] = useState(false);
@@ -11,17 +11,17 @@ const SearchBar = ({valueText, onChangeSearch, clickSearch}) => {
         height: 45,
         borderWidth: 1,
         borderColor: green,
-        marginVertical: 20,
+        marginVertical: 5,
         borderRadius: 10,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
       }}>
       <TextInput
-        style={{width: '80%', paddingLeft: 10}}
+        style={{width: '80%', paddingLeft: 10, color: textColor}}
         placeholder={'Cari Tere Liye'}
         value={valueText}
-        onChangeText={e => onChangeSearch(e)}
+        onChangeText={onChangeSearch}
       />
       {require && (
         <Text style={{position: 'absolute', top: 45, color: 'red'}}>

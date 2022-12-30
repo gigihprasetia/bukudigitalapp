@@ -27,6 +27,7 @@ const SplashScreen = ({navigation}) => {
       navigation.dispatch(StackActions.replace('Drawer'));
     }, 3000);
   }, []);
+
   return (
     <SafeAreaView>
       <View
@@ -55,7 +56,7 @@ function MyDrawer() {
     <Drawer.Navigator
       initialRouteName="Dashboard"
       screenOptions={{
-        drawerType: 'back',
+        drawerType: 'front',
         drawerActiveTintColor: green,
         headerTintColor: green,
       }}
@@ -83,6 +84,7 @@ function MyDrawer() {
                           token: '',
                         },
                       });
+                      await AsyncStorage.removeItem('Auth');
                     } else {
                       props.navigation.navigate(val.name);
                     }

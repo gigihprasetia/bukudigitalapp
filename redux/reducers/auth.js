@@ -16,7 +16,7 @@ const authRedux = (state = initialState, action) => {
       },
     };
   } else {
-    console.log(state, 'cekState');
+    // console.log(state, 'cekState');
     return state;
   }
 };

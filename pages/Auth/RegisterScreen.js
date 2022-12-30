@@ -8,7 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {green} from '../../assets/utils';
+import {green, textColor} from '../../assets/utils';
 import ModalRegister from '../../components/Modal/ModalRegister';
 import {registerFunction} from '../../Function/authFunction';
 import {ValidationRegister} from '../../components/Validation/ValidationRules';
@@ -211,10 +211,12 @@ const Style = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     borderColor: 'gray',
+    color: textColor,
   },
 
   label: {
     paddingLeft: 3,
+    color: textColor,
     marginBottom: 5,
   },
   containInput: {

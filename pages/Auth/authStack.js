@@ -5,7 +5,6 @@ import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
 import {green} from '../../assets/utils';
 import {Keyboard, Text, TouchableOpacity, View} from 'react-native';
-import {set} from 'react-native-reanimated';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -19,6 +18,8 @@ const AuthStack = () => {
     const close = Keyboard.addListener('keyboardDidHide', () =>
       setIsTyping(false),
     );
+    // console.log('ihi');
+
     return () => {
       open.remove();
       close.remove();

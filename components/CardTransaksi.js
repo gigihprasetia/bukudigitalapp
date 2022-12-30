@@ -1,8 +1,17 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {green, orange} from '../assets/utils';
+import {normalize} from '../Function/FontModule';
 
-const CardTransaksi = () => {
+const CardTransaksi = ({
+  statusPembayaran,
+  paymentDue,
+  author,
+  title,
+  price,
+  bayarSekarang,
+  DownloadInvoice,
+}) => {
   return (
     <View style={styles.card}>
       <View
@@ -20,16 +29,18 @@ const CardTransaksi = () => {
           style={{
             borderWidth: 1,
             borderColor: orange,
-            width: 180,
+            paddingHorizontal: 15,
             height: 20,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: 5,
           }}>
-          <Text style={{color: orange}}>Menunggu Pembayaran</Text>
+          <Text style={{color: orange, fontSize: normalize(12)}}>
+            {statusPembayaran}
+          </Text>
         </View>
-        <Text>28 November 2022</Text>
+        <Text style={{fontSize: normalize(14)}}>{paymentDue}</Text>
       </View>
       <View
         style={{
@@ -42,54 +53,64 @@ const CardTransaksi = () => {
         <View>
           <Text
             style={{
-              fontSize: 17,
+              fontSize: normalize(15),
               fontWeight: '500',
               width: 240,
             }}>
-            {'Belajar Cepat Bahasa Inggris '.length > 40
-              ? 'Belajar Cepat Bahasa Inggris '.slice(0, 40) + '...'
-              : 'Belajar Cepat Bahasa Inggris '}
+            {title}
           </Text>
-          <Text>Arif Isnaini</Text>
+          <Text>{author}</Text>
         </View>
         <View>
-          <Text>Total Harga</Text>
-          <Text style={{fontSize: 17, fontWeight: '500'}}>Rp 84.000</Text>
+          <Text style={{fontSize: normalize(12)}}>Total Harga</Text>
+          <Text style={{fontSize: normalize(17), fontWeight: '500'}}>
+            {price}
+          </Text>
         </View>
       </View>
-      <View
-        style={{
-          height: '40%',
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'flex-end',
-          alignItems: 'center',
-        }}>
-        <TouchableOpacity
+      {statusPembayaran != 'EXPIRED' && (
+        <View
           style={{
-            height: '50%',
+            height: '40%',
+            width: '100%',
             display: 'flex',
-            justifyContent: 'center',
-            borderWidth: 1,
-            borderRadius: 10,
-            paddingHorizontal: 10,
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
           }}>
-          <Text style={{color: 'gray'}}>Download Invoice</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            height: '50%',
-            display: 'flex',
-            justifyContent: 'center',
-            backgroundColor: green,
-            marginHorizontal: 10,
-            paddingHorizontal: 10,
-            borderRadius: 10,
-          }}>
-          <Text style={{color: 'white'}}>Bayar Sekarang</Text>
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity
+            onPress={DownloadInvoice}
+            style={{
+              height: '50%',
+              display: 'flex',
+              justifyContent: 'center',
+              borderWidth: 1,
+              borderRadius: 10,
+              paddingHorizontal: 10,
+            }}>
+            <Text style={{color: 'gray', fontSize: normalize(12)}}>
+              Download Invoice
+            </Text>
+          </TouchableOpacity>
+          {statusPembayaran != 'WAIT_CONFIRM' && (
+            <TouchableOpacity
+              onPress={bayarSekarang}
+              style={{
+                height: '50%',
+                display: 'flex',
+                justifyContent: 'center',
+                backgroundColor: green,
+                marginHorizontal: 10,
+                paddingHorizontal: 10,
+                borderRadius: 10,
+              }}>
+              <Text style={{color: 'white', fontSize: normalize(12)}}>
+                Bayar Sekarang
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      )}
     </View>
   );
 };

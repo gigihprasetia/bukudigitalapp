@@ -4,41 +4,49 @@ import {
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
-import {green} from '../../assets/utils';
+import {green, textColor} from '../../assets/utils';
 import CardBook from '../../components/CardBook';
+import {getQueryBook} from '../../Function/getFunction';
 
 const DetailKategori = props => {
   const {category} = props.route.params;
-  //   console.log(props.route.params.category);
+  // Keyword,Kategori
+  const {type} = props.route.params;
+  const [dataRes, setDataRes] = useState([]);
+  const {navigation} = props;
+  useEffect(() => {
+    getQueryBook(type, category, res => setDataRes(res.data.data));
+  }, [category]);
   return (
     <SafeAreaView>
-      <View style={style.view1}>
-        <Text style={{fontWeight: '700'}}>Hasil Pencarian</Text>
-        <Text style={{fontSize: 20, fontWeight: '700', color: green}}>
-          Kategory {category}
-        </Text>
-      </View>
-      <ScrollView
-        style={{
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'white',
-        }}>
-        <View style={{display: 'flex', alignItems: 'center'}}>
-          <View style={style.Layout}>
-            {[1, 2, 3, 4, 5, 6, 7].map(book => (
-              <TouchableOpacity key={book}>
+      <View>
+        <FlatList
+          numColumns={2}
+          data={dataRes}
+          columnWrapperStyle={{justifyContent: 'space-between'}}
+          keyExtractor={item => item.id}
+          renderItem={book => {
+            console.log(book.index);
+            return (
+              <>
                 <CardBook
-                  imageProp={require('../../assets/images/coverbook1.jpg')}
+                  key={book.item.id}
+                  title={book.item.title}
+                  author={book.item.author}
+                  price={book.item.price}
+                  onPress={() =>
+                    navigation.push('DetailBookScreen', {idBook: book.item.id})
+                  }
                 />
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
-      </ScrollView>
+              </>
+            );
+          }}
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -58,7 +66,7 @@ const style = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    width: '90%',
+    flex: 1,
   },
 });
 

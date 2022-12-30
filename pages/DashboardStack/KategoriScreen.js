@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useIsFocused} from '@react-navigation/native';
+import {textColor} from '../../assets/utils';
 
 const KategoriScreen = ({navigation}) => {
   // const [pre, setpre] = useState(false);
@@ -33,7 +34,7 @@ const KategoriScreen = ({navigation}) => {
                 }
                 key={category}
                 style={Style.cardCate}>
-                <Text>{category}</Text>
+                <Text style={{color: textColor}}>{category}</Text>
                 <Ionicons name="md-arrow-redo-outline" size={20} />
               </TouchableOpacity>
             ),
