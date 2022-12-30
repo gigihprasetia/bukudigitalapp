@@ -1,6 +1,7 @@
 import {API_URL} from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import RNFetchBlob from 'rn-fetch-blob';
 
 export const getBook = async callback => {
   callback([], true);
@@ -98,6 +99,49 @@ export const getTransaction = async callback => {
       },
     });
 
+    callback(result);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPdf = async (idTransaction, callback) => {
+  try {
+    const token = await AsyncStorage.getItem('Auth');
+    const {config, fs} = RNFetchBlob;
+    const result = await axios.get(
+      `${API_URL}/user-sys/invoice-download/${idTransaction}/inquiry`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    let PictureDir = fs.dirs.PictureDir;
+    let date = new Date();
+    let options = {
+      fileCache: true,
+      addAndroidDownloads: {
+        //Related to the Android only
+        useDownloadManager: true,
+        notification: true,
+        path:
+          PictureDir +
+          '/Report_Download' +
+          Math.floor(date.getTime() + date.getSeconds() / 2) +
+          '.' +
+          'pdf',
+        description: 'Risk Report Download',
+      },
+    };
+    config(options)
+      .fetch('GET', result.data.data)
+      .then(res => {
+        //Showing alert after successful downloading
+        console.log('res -> ', JSON.stringify(res));
+        alert('Report Downloaded Successfully.');
+      });
     callback(result);
   } catch (error) {
     console.log(error);

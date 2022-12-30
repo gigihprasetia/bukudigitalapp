@@ -13,12 +13,14 @@ import React, {useState} from 'react';
 import CardTransaksi from '../../components/CardTransaksi';
 import {useSelector} from 'react-redux';
 import {useEffect} from 'react';
-import {getTransaction} from '../../Function/getFunction';
+import {getPdf, getTransaction} from '../../Function/getFunction';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {normalize} from '../../Function/FontModule';
 import {green} from '../../assets/utils';
 import Material from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useIsFocused} from '@react-navigation/native';
+import RNFetchBlob from 'rn-fetch-blob';
+
 const TransaksiScreen = props => {
   const {navigation} = props;
   const isLogin = useSelector(state => state.authRedux.isLogin);
@@ -36,6 +38,57 @@ const TransaksiScreen = props => {
       null;
     }
   }, [isLogin.status, isFocus]);
+
+  const downloadHistory = async () => {
+    const {config, fs} = RNFetchBlob;
+    let PictureDir = fs.dirs.PictureDir;
+    let date = new Date();
+    let options = {
+      fileCache: true,
+      addAndroidDownloads: {
+        //Related to the Android only
+        useDownloadManager: true,
+        notification: true,
+        path:
+          PictureDir +
+          '/Report_Download' +
+          Math.floor(date.getTime() + date.getSeconds() / 2),
+        description: 'Risk Report Download',
+      },
+    };
+    config(options)
+      .fetch('GET', url)
+      .then(res => {
+        //Showing alert after successful downloading
+        console.log('res -> ', JSON.stringify(res));
+        alert('Report Downloaded Successfully.');
+      });
+  };
+
+  const historyDownload = async () => {
+    try {
+      PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        {
+          title: 'storage title',
+          message: 'storage_permission',
+        },
+      ).then(granted => {
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          //Once user grant the permission start downloading
+          console.log('Storage Permission Granted.');
+          downloadHistory();
+        } else {
+          //If permission denied then show alert 'Storage Permission
+          // Not Granted'
+          Alert.alert('storage_permission');
+        }
+      });
+    } catch (err) {
+      //To handle permission related issue
+      console.log('error', err);
+    }
+  };
 
   return (
     <SafeAreaView>
@@ -117,6 +170,9 @@ const TransaksiScreen = props => {
                 price={transaction.item.price_f}
                 title={transaction.item.book_title}
                 statusPembayaran={transaction.item.status}
+                DownloadInvoice={() =>
+                  getPdf(transaction.item.id, res => console.log(res))
+                }
                 bayarSekarang={() =>
                   navigation.push('Payment Manual', {data: transaction.item.id})
                 }

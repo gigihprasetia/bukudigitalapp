@@ -167,6 +167,7 @@ const RegisterScreen = ({navigation}) => {
                           data: null,
                           openModal: false,
                         });
+
                         navigation.navigate('Login');
                       }}
                       style={{
