@@ -19,7 +19,7 @@ import {normalize} from '../../Function/FontModule';
 import {green} from '../../assets/utils';
 import Material from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useIsFocused} from '@react-navigation/native';
-import RNFetchBlob from 'rn-fetch-blob';
+
 
 const TransaksiScreen = props => {
   const {navigation} = props;
