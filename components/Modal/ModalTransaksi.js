@@ -2,6 +2,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Material from 'react-native-vector-icons/MaterialCommunityIcons';
 import {normalize} from '../../Function/FontModule';
+import {textColor} from '../../assets/utils';
 
 const ModalTransaksi = ({isCencel, isPayment, message}) => {
   return (
@@ -9,11 +10,15 @@ const ModalTransaksi = ({isCencel, isPayment, message}) => {
       <View style={style.background}></View>
       <View style={style.cardView}>
         <View>
-          <Text>Bayar Pakai Apa</Text>
-          <Text>Pilih metode pembayaran kesukaan kamu</Text>
+          <Text style={{fontSize: normalize(15), color: textColor}}>
+            Bayar Pakai Apa
+          </Text>
+          <Text style={{fontSize: normalize(13), color: textColor}}>
+            Pilih metode pembayaran kesukaan kamu
+          </Text>
         </View>
         <View>
-          <Text style={{fontSize: normalize(12), color: 'red'}}>{message}</Text>
+          <Text style={{fontSize: normalize(13), color: 'red'}}>{message}</Text>
         </View>
         <View>
           <TouchableOpacity
@@ -29,7 +34,14 @@ const ModalTransaksi = ({isCencel, isPayment, message}) => {
               paddingHorizontal: 10,
             }}>
             <Material name="credit-card" />
-            <Text style={{marginLeft: 5}}>Transfer Manual</Text>
+            <Text
+              style={{
+                marginLeft: 5,
+                fontSize: normalize(13),
+                color: textColor,
+              }}>
+              Transfer Manual
+            </Text>
           </TouchableOpacity>
         </View>
 

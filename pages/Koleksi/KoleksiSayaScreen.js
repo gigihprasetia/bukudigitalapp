@@ -67,8 +67,8 @@ const KoleksiSayaScreen = props => {
               }}
               onPress={() => {
                 isLogin.status
-                  ? navigation.navigate('Dashboard')
-                  : navigation.navigate('AuthStack');
+                  ? navigation.navigate('Drawer', {screen: 'Dashboard'})
+                  : navigation.navigate('Drawer', {screen: 'Account'});
               }}>
               <Text style={{color: 'white', fontSize: normalize(12)}}>
                 {isLogin.status ? 'Cari Buku' : 'Login'}

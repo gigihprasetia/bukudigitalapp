@@ -163,6 +163,7 @@ const Style = StyleSheet.create({
   label: {
     paddingLeft: 3,
     marginBottom: 5,
+    color: textColor,
   },
   containInput: {
     width: '90%',

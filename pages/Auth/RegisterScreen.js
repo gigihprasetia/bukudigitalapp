@@ -41,7 +41,14 @@ const RegisterScreen = ({navigation}) => {
               }
             })
           }>
-          {({handleChange, handleBlur, handleSubmit, values, errors}) => {
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            resetForm,
+          }) => {
             return (
               <>
                 <View style={Style.containInput}>
@@ -63,6 +70,7 @@ const RegisterScreen = ({navigation}) => {
                   <TextInput
                     name={'name'}
                     style={Style.input}
+                    value={values.name}
                     placeholder="yourname"
                     onChangeText={handleChange('name')}
                   />
@@ -87,6 +95,7 @@ const RegisterScreen = ({navigation}) => {
                   </View>
                   <TextInput
                     name={'password'}
+                    value={values.email}
                     style={Style.input}
                     onChangeText={handleChange('email')}
                     placeholder="yourname@gmail.com"
@@ -111,6 +120,7 @@ const RegisterScreen = ({navigation}) => {
                   </View>
                   <TextInput
                     name={'password'}
+                    value={values.password}
                     style={Style.input}
                     onChangeText={handleChange('password')}
                     placeholder="*******"
@@ -137,6 +147,7 @@ const RegisterScreen = ({navigation}) => {
                   <TextInput
                     style={Style.input}
                     placeholder="*******"
+                    value={values.password1}
                     secureTextEntry={true}
                     name={'password1'}
                     onChangeText={handleChange('password1')}
@@ -167,7 +178,7 @@ const RegisterScreen = ({navigation}) => {
                           data: null,
                           openModal: false,
                         });
-
+                        resetForm({});
                         navigation.navigate('Login');
                       }}
                       style={{

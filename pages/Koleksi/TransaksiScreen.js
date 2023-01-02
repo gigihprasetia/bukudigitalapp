@@ -20,7 +20,6 @@ import {green} from '../../assets/utils';
 import Material from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useIsFocused} from '@react-navigation/native';
 
-
 const TransaksiScreen = props => {
   const {navigation} = props;
   const isLogin = useSelector(state => state.authRedux.isLogin);
@@ -133,8 +132,8 @@ const TransaksiScreen = props => {
             }}
             onPress={() => {
               isLogin.status
-                ? navigation.navigate('Dashboard')
-                : navigation.navigate('AuthStack');
+                ? navigation.navigate('Drawer', {screen: 'Dashboard'})
+                : navigation.navigate('Drawer', {screen: 'Account'});
             }}>
             <Text style={{color: 'white', fontSize: normalize(12)}}>
               {isLogin.status ? 'Cari Buku' : 'Login'}
