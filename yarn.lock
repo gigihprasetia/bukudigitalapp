@@ -6217,6 +6217,11 @@
     "react-freeze" "^1.0.0"
     "warn-once" "^0.1.0"
 
+"react-native-swiper-flatlist@^3.0.18":
+  "integrity" "sha512-GHo54SS72sJWWGjnS18AeVievOeSMkTJaLSSS99/kHcnB1Wo3MJKYggtPjFVmc7eFaHcOIwqtGvyNEPxN2MsSA=="
+  "resolved" "https://registry.npmjs.org/react-native-swiper-flatlist/-/react-native-swiper-flatlist-3.0.18.tgz"
+  "version" "3.0.18"
+
 "react-native-vector-icons@^9.2.0":
   "integrity" "sha512-wKYLaFuQST/chH3AJRjmOLoLy3JEs1JR6zMNgTaemFpNoXs0ztRnTxcxFD9xhX7cJe1/zoN5BpQYe7kL0m5yyA=="
   "resolved" "https://registry.npmjs.org/react-native-vector-icons/-/react-native-vector-icons-9.2.0.tgz"
@@ -6230,7 +6235,7 @@
   "resolved" "https://registry.npmjs.org/react-native-webp-format/-/react-native-webp-format-1.1.2.tgz"
   "version" "1.1.2"
 
-"react-native@*", "react-native@^0.0.0-0 || 0.60 - 0.71 || 1000.0.0", "react-native@>=0.42.0", "react-native@>=0.59", "react-native@>=0.6.0", "react-native@0.70.6":
+"react-native@*", "react-native@^0.0.0-0 || 0.60 - 0.71 || 1000.0.0", "react-native@>=0.42.0", "react-native@>=0.59", "react-native@>=0.59.0", "react-native@>=0.6.0", "react-native@0.70.6":
   "integrity" "sha512-xtQdImPHnwgraEx3HIZFOF+D1hJ9bC5mfpIdUGoMHRws6OmvHAjmFpO6qfdnaQ29vwbmZRq7yf14sbury74R/w=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.70.6.tgz"
   "version" "0.70.6"
