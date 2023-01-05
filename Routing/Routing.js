@@ -18,6 +18,8 @@ import PaymentManualScreen from '../pages/Payment/PaymentManualScreen';
 import DetailKategori from '../pages/DetailPage/DetailKategori';
 import HomeScreen from '../pages/DashboardStack/HomeScreen';
 import {useSelector, useDispatch} from 'react-redux';
+import {onSignin} from '../Function/authFunction';
+import {GoogleSignin} from 'react-native-google-signin';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -85,6 +87,21 @@ function MyDrawer() {
                         },
                       });
                       await AsyncStorage.removeItem('Auth');
+                      onSignin(async () => {
+                        try {
+                          await GoogleSignin.signOut();
+                          dispatch({
+                            type: 'auth',
+                            data: {
+                              status: false,
+                              token: '',
+                            },
+                          });
+                          await AsyncStorage.removeItem('Auth');
+                        } catch (error) {
+                          console.error(error);
+                        }
+                      });
                     } else {
                       props.navigation.navigate(val.name);
                     }

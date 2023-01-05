@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "863991149007",
+    "project_id": "bukudigitalku",
+    "storage_bucket": "bukudigitalku.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863991149007:android:13a45c32c85c81cf6e22ba",
+        "android_client_info": {
+          "package_name": "com.bukudigitalku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863991149007-p3tcqgc4hhf7k5ok13krm41eu58bfj55.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bukudigitalku",
+            "certificate_hash": "f79ae3f7dee242674e1e2b56daa30ea12cc9e037"
+          }
+        },
+        {
+          "client_id": "863991149007-2u04ulnuj73760f9lk1ikjs1l0o9l1d6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCENoMlEhhZcNAp3-L3GxrPUUvsRVwZ24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863991149007-2u04ulnuj73760f9lk1ikjs1l0o9l1d6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

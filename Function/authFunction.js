@@ -1,6 +1,12 @@
 import axios from 'axios';
 import {API_URL} from '@env';
 import DeviceInfo from 'react-native-device-info';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from 'react-native-google-signin';
+
 export const registerFunction = async (form, callback) => {
   try {
     const result = await axios.post(`${API_URL}/user-sys/register`, form);
@@ -33,4 +39,11 @@ export const loginFunction = async (form, callback) => {
     console.log(error, 'err Login Function');
     callback(error);
   }
+};
+
+export const onSignin = callback => {
+  GoogleSignin.configure({
+    webClientId: `863991149007-64d4a47jhkuorfeuadi141th4anudfut.apps.googleusercontent.com`,
+  });
+  callback();
 };

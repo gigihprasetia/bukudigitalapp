@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-
 import {
   Text,
   View,
@@ -12,8 +11,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {green, textColor} from '../../assets/utils';
 import {Formik} from 'formik';
 import {ValidationLogin} from '../../components/Validation/ValidationRules';
-import {loginFunction} from '../../Function/authFunction';
+import {loginFunction, onSignin} from '../../Function/authFunction';
 import {useDispatch} from 'react-redux';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from 'react-native-google-signin';
 
 const LoginScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -116,6 +120,33 @@ const LoginScreen = ({navigation}) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity
+                  onPress={() =>
+                    onSignin(async () => {
+                      try {
+                        await GoogleSignin.hasPlayServices();
+                        const userInfo = await GoogleSignin.signIn();
+                        console.log(userInfo, 'gaga');
+                        await AsyncStorage.setItem('Auth', userInfo.idToken);
+                        dispatch({
+                          type: 'auth',
+                          data: {
+                            status: true,
+                            token: userInfo.idToken,
+                          },
+                        });
+                        navigation.navigate('Drawer', {screen: 'Koleksi Saya'});
+                      } catch (error) {
+                        console.log(error);
+                        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                        } else if (error.code === statusCodes.IN_PROGRESS) {
+                        } else if (
+                          error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE
+                        ) {
+                        } else {
+                        }
+                      }
+                    })
+                  }
                   style={{
                     marginTop: 25,
                     width: '90%',
